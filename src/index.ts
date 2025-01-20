@@ -1,10 +1,6 @@
 import axios from "axios";
 import {
-  FeaturedImage,
   Product,
-  ProductImage,
-  ProductOption,
-  ProductVariant,
   ScrapeOptions,
 } from "./types";
 
