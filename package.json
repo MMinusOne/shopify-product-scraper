@@ -2,8 +2,20 @@
   "name": "shopify-product-scraper",
   "version": "1.0.2",
   "type": "module",
-  "main": "index.ts",
-  "author": "",
-  "license": "ISC",
-  "description": ""
+  "main": "dist/index.js",
+  "module": "dist/index.mjs",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "build": "tsup index.ts --format cjs,esm --dts"
+  },
+  "author": "MMinusOne",
+  "repository": {
+    "url": "https://github.com/MMinusOne/shopify-product-scraper"
+  },
+  "license": "MIT",
+  "description": "",
+  "devDependencies": {
+    "tsup": "^8.3.5",
+    "typescript": "^5.7.3"
+  }
 }
