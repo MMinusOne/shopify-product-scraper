@@ -2,11 +2,6 @@ import axios from "axios";
 
 const shopifyIndicators = [
   /myshopify\.com/i,
-  /shopify\.com/i,
-  /cdn\.shopify\.com/i,
-  /Shopify\.Buy\.SDK/i,
-  /var Shopify =/i,
-  /{{ '.*' | asset_url }}/i,
 ];
 
 export async function isValidURL(url: string): Promise<boolean> {
