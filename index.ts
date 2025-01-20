@@ -1,8 +1,6 @@
 import axios from "axios";
 
-const shopifyIndicators = [
-  /myshopify\.com/i,
-];
+const shopifyIndicators = [/myshopify\.com/i];
 
 export async function isValidURL(url: string): Promise<boolean> {
   try {
@@ -17,23 +15,27 @@ export async function scrape(url: string, options: ScrapeOptions) {
   const isValid = await isValidURL(url);
   if (!isValid) return null;
 
+  const limit = options?.limit || Infinity;
   const data: Product[] = [];
   let page = 0;
 
-  while (data.length < options.limit) {
-    const limit = Math.min(250, options.limit - data.length);
-    const { data: requestedData } = await axios.get(`${url}/products.json/?limit=${limit}&page=${page}`);
-    
+  while (data.length < limit) {
+    const limit = Math.min(250, limit - data.length);
+    const { data: requestedData } = await axios.get(
+      `${url}/products.json/?limit=${limit}&page=${page}`
+    );
+
     if (!requestedData?.products?.length) break;
 
     data.push(...requestedData.products);
-    options.onProgress({
-      progress: data.length / options.limit,
-      products: data,
-    });
+    if (options.onProgress)
+      options.onProgress({
+        progress: data.length / limit,
+        products: data,
+      });
     page++;
   }
-  
+
   return data;
 }
 
@@ -104,8 +106,8 @@ export interface Product {
 }
 
 export interface ScrapeOptions {
-  limit: number;
-  onProgress: (progressOptions: {
+  limit?: number;
+  onProgress?: (progressOptions: {
     progress: number;
     products: Product[];
   }) => void;
