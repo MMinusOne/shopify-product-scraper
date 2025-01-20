@@ -11,16 +11,20 @@ export async function isValidURL(url: string): Promise<boolean> {
   }
 }
 
-export async function scrape(url: string, options: ScrapeOptions) {
+export async function scrape(url: string, clientOptions: ScrapeOptions) {
   const isValid = await isValidURL(url);
   if (!isValid) return null;
 
-  const limit = options?.limit || Infinity;
+  const options = {
+    limit: clientOptions?.limit || Infinity,
+    onProgress: clientOptions.onProgress
+  }
+
   const data: Product[] = [];
   let page = 0;
 
-  while (data.length < limit) {
-    const limit = Math.min(250, limit - data.length);
+  while (data.length < options.limit) {
+    const limit = Math.min(250, options.limit - data.length);
     const { data: requestedData } = await axios.get(
       `${url}/products.json/?limit=${limit}&page=${page}`
     );
