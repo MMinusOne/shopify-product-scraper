@@ -11,13 +11,13 @@ export async function isValidURL(url: string): Promise<boolean> {
   }
 }
 
-export async function scrape(url: string, clientOptions: ScrapeOptions) {
+export async function scrape(url: string, clientOptions?: ScrapeOptions) {
   const isValid = await isValidURL(url);
   if (!isValid) return null;
 
   const options = {
     limit: clientOptions?.limit || Infinity,
-    onProgress: clientOptions.onProgress
+    onProgress: clientOptions?.onProgress
   }
 
   const data: Product[] = [];
