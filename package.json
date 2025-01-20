@@ -1,6 +1,7 @@
 {
   "name": "shopify-product-scraper",
-  "version": "1.0.0",
+  "version": "1.0.2",
+  "type": "module",
   "main": "index.ts",
   "author": "",
   "license": "ISC",
