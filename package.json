@@ -1,7 +1,7 @@
 {
-  "name": "@mminusone/shopify-product-scraper",
+  "name": "shopify-product-scraper",
   "version": "1.0.0",
-  "main": "index.js",
+  "main": "index.ts",
   "author": "",
   "license": "ISC",
   "description": ""
