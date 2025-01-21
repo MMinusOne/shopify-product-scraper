@@ -1,13 +1,10 @@
-import axios from "axios";
-import {
-  Product,
-  ScrapeOptions,
-} from "./types";
+import { Product, ScrapeOptions } from "./types";
 import { isValidURL } from "./url";
 
-const shopifyIndicators = [/myshopify\.com/i];
-
-export async function scrape(url: string, { limit = Infinity, onProgress }: ScrapeOptions = {}) {
+export async function scrape(
+  url: string,
+  { limit = Infinity, onProgress }: ScrapeOptions = {},
+) {
   const isValid = await isValidURL(url);
   if (!isValid) return null;
 
@@ -16,9 +13,10 @@ export async function scrape(url: string, { limit = Infinity, onProgress }: Scra
 
   while (data.length < limit) {
     const pageLimit = Math.min(250, limit - data.length);
-    const { data: requestedData } = await axios.get(
-      `${url}/products.json/?limit=${pageLimit}&page=${page}`
-    );
+
+    const requestedData = await fetch(
+      `${url}/products.json/?limit=${pageLimit}&page=${page}`,
+    ).then((res) => res.json());
 
     if (!requestedData?.products?.length) break;
 
