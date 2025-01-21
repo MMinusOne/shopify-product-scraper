@@ -1,4 +1,10 @@
-const shopifyIndicators = [/myshopify\.com/i];
+const shopifyIndicators = [
+  /shopify\.com/i,
+  /cdn\.shopify\.com/i,
+  /Shopify\.Buy\.SDK/i,
+  /var Shopify =/i,
+  /{{ '.*' | asset_url }}/i,
+]
 
 export async function isValidURL(url: string): Promise<boolean> {
   try {
