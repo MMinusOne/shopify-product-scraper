@@ -6,7 +6,18 @@
   "module": "dist/index.mjs",
   "types": "dist/index.d.ts",
   "type": "module",
-  "categories": ["Other"],
+  "categories": [
+    "Other"
+  ],
+  "keywords": [
+    "Shopify",
+    "API",
+    "SDK",
+    "Scraper",
+    "Shopify Products",
+    "Products",
+    "Data"
+  ],
   "scripts": {
     "build": "tsup src/index.ts --format cjs,esm --dts"
   },
